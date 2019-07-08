@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - internal
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11.4
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - internal
+
+networks:
+  internal:
